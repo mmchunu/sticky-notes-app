@@ -1,0 +1,25 @@
+{% extends 'notes/base.html' %}  <!-- Use the base template for consistent layout -->
+
+{% block content %}
+<h2>All Sticky Notes</h2>
+
+<!-- Link to create a new note -->
+<p><a href="{% url 'create' %}">+ Create New Note</a></p>
+
+<!-- Display all notes -->
+<ul>
+    {% for note in notes %}
+        <li>
+            <!-- Show note title and content -->
+            <strong>{{ note.title }}</strong>: {{ note.content }}
+            
+            <!-- Links to edit and delete note using primary key -->
+            <a href="{% url 'edit' note.pk %}">Edit</a>
+            <a href="{% url 'delete' note.pk %}">Delete</a>
+        </li>
+    {% empty %}
+        <!-- Message if there are no notes -->
+        <li>No notes available.</li>
+    {% endfor %}
+</ul>
+{% endblock %}
